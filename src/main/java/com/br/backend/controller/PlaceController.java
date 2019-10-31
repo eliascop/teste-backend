@@ -33,7 +33,7 @@ public class PlaceController {
     }
     
     @RequestMapping(value="/edit", method = RequestMethod.GET)
-    public String edit(Model model,@RequestParam Long id){
+    public String edit(Model model,@RequestParam int id){
     	Place place = placeService.findById(id);
     	if(place!=null) {
     		model.addAttribute("place",place);

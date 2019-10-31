@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "place", catalog = "challenge")
+@Table(name = "place", schema = "place")
 public class Place implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Place implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	@JsonProperty("id")
-	private Long id;
+	private int id;
 	
 	@JsonProperty("name")
 	private String name;
@@ -54,12 +54,15 @@ public class Place implements Serializable{
 		this.state = state;
 	}
 
-	public Long getId() {
+
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -96,10 +99,13 @@ public class Place implements Serializable{
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -109,7 +115,7 @@ public class Place implements Serializable{
 		if (!(obj instanceof Place))
 			return false;
 		Place other = (Place) obj;
-		return Objects.equals(id, other.id);
+		return id == other.id;
 	}
 
 	@Override

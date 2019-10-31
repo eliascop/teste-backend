@@ -35,12 +35,12 @@ public class PlaceResource {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Place place) {
+	public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody Place place) {
 		return ResponseEntity.ok(placeService.update(id, place));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(Long id) {
+	public ResponseEntity<?> delete(int id) {
 		placeService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
@@ -51,7 +51,7 @@ public class PlaceResource {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Long id) {
+	public ResponseEntity<?> find(@PathVariable int id) {
 		return ResponseEntity.ok(placeService.findById(id));
 	}
 

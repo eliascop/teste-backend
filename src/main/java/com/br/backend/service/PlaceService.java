@@ -25,8 +25,8 @@ public class PlaceService {
 		return this.placeRepository.save(place);
 	}
 	
-	public Place update(Long id, Place place) {
-		Place placeSaved = placeRepository.findById(id.intValue()).orElseThrow(() -> new RuntimeException("Place not found"));
+	public Place update(int id, Place place) {
+		Place placeSaved = placeRepository.findById(id).orElseThrow(() -> new RuntimeException("Place not found"));
 		
 		BeanUtils.copyProperties(place, placeSaved, "createdAt");
 		
@@ -34,16 +34,16 @@ public class PlaceService {
 		return placeRepository.save(place);
 	}
 
-	public void delete(Long id) {
-		placeRepository.deleteById(id.intValue());
+	public void delete(int id) {
+		placeRepository.deleteById(id);
 	}
 
 	public List<Place> findAll(){
-		return this.placeRepository.findAll();
+		return (List<Place>) this.placeRepository.findAll();
 	}
 	
-	public Place findById(Long id){
-		return this.placeRepository.findById(id.intValue()).orElseThrow(() -> new EmptyResultDataAccessException(1));
+	public Place findById(int id){
+		return placeRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
 	}
 	
 	public List<Place> findByName(String name) {

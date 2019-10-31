@@ -7,5 +7,5 @@ import com.br.backend.model.Place;
 
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Integer>{
-
+	
 }
