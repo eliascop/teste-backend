@@ -1,9 +1,13 @@
 package com.br.backend.service;
 
+import java.beans.FeatureDescriptor;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Example;
@@ -25,14 +29,23 @@ public class PlaceService {
 		return this.placeRepository.save(place);
 	}
 	
-	public Place update(int id, Place place) {
-		Place placeSaved = placeRepository.findById(id).orElseThrow(() -> new RuntimeException("Place not found"));
-		
-		BeanUtils.copyProperties(place, placeSaved, "createdAt");
-		
+	public Place update(Place place) {
+		Place placeSaved = placeRepository.findById(place.getId()).orElseThrow(() -> new RuntimeException("Place not found"));
 		placeSaved.setUpdatedAt(new Date());
+		
+		String[] nullPropertyNames = getNullPropertyNames(placeSaved);
+		BeanUtils.copyProperties(placeSaved, place, nullPropertyNames);
+		
 		return placeRepository.save(place);
 	}
+	
+	public static String[] getNullPropertyNames(Object source) {
+        final BeanWrapper wrappedSource = new BeanWrapperImpl(source);
+        return Stream.of(wrappedSource.getPropertyDescriptors())
+            .map(FeatureDescriptor::getName)
+            .filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == null)
+            .toArray(String[]::new);
+    }
 
 	public void delete(int id) {
 		placeRepository.deleteById(id);

@@ -36,7 +36,8 @@ public class PlaceResource {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody Place place) {
-		return ResponseEntity.ok(placeService.update(id, place));
+		place.setId(id);
+		return ResponseEntity.ok(placeService.update(place));  
 	}
 
 	@DeleteMapping("/{id}")
@@ -46,7 +47,7 @@ public class PlaceResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> find(String name) {
+	public ResponseEntity<?> find(String name) 	{
 		return ResponseEntity.ok(placeService.findByName(name));
 	}
 	

@@ -28,8 +28,8 @@ public class Place implements Serializable{
 	@JsonProperty("name")
 	private String name;
 	
-	@JsonProperty("slug")
-	private String slug;
+	@JsonProperty("district")
+	private String district;
 	
 	@JsonProperty("city")
 	private String city;
@@ -47,9 +47,9 @@ public class Place implements Serializable{
 	
 	public Place() {}
 	
-	public Place(String name, String slug, String city, String state) {
+	public Place(String name, String district, String city, String state) {
 		this.name = name;
-		this.slug = slug;
+		this.district = district;
 		this.city = city;
 		this.state = state;
 	}
@@ -69,11 +69,11 @@ public class Place implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSlug() {
-		return slug;
+	public String getDistrict() {
+		return district;
 	}
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 	public String getCity() {
 		return city;
@@ -120,7 +120,7 @@ public class Place implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Place [id=" + id + ", name=" + name + ", slug=" + slug + ", city=" + city + ", state=" + state
+		return "Place [id=" + id + ", name=" + name + ", district=" + district + ", city=" + city + ", state=" + state
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
