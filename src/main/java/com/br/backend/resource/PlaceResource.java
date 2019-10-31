@@ -40,7 +40,7 @@ public class PlaceResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(int id) {
+	public ResponseEntity<?> delete(@PathVariable int id) {
 		placeService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
